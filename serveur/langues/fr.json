@@ -1,0 +1,17 @@
+{
+    "status": {
+        "0": "L'instance est stoppée",
+        "1": "Téléchargement des ensembles",
+        "2": "Téléchargement et construction de l'architecture",
+        "3": "Apprentissage en cours",
+        "4": "Arrêt en cours",
+        "5": "Sauvegarde en cours",
+        "6": "En pause"
+    },
+    "error": {
+        "0": "Aucune erreur",
+        "1": "Impossible de télécharger les données",
+        "2": "Architecture incorrecte",
+        "3": "Une erreur est survenue durant l'apprentissage"
+    }
+}

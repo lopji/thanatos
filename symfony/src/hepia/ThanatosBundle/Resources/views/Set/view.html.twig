@@ -1,0 +1,38 @@
+{% extends "hepiaThanatosBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Voir un ensemble{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Voir un ensemble</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Résumé
+                    </div>
+                    <div class="panel-body">
+                        <table width="100%" class="table table-bordered ">
+                            <tr>
+                                <th>Titre</th>
+                                <td>{{ data.title }}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{{ data.description }}</td>
+                            </tr>
+                            <tr>
+                                <th>L'ensemble de données</th>
+                                <td>{{ data.dataset }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

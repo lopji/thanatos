@@ -1,0 +1,7 @@
+<ul class="pagination">
+    {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %} 
+        <li {% if p == pagination.page %} class="paginate_button active"{% endif %} aria-controls="dataTables-example" tabindex="0">
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
+        </li>
+    {% endfor %} 
+</ul>

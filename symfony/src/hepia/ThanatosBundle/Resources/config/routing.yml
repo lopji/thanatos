@@ -1,0 +1,53 @@
+hepia_thanatos_homepage:
+    path:     /
+    defaults: { _controller: hepiaThanatosBundle:Default:index }
+
+hepia_thanatos_comparator:
+    path:     /comparator
+    defaults: { _controller: hepiaThanatosBundle:Comparator:index }
+
+hepia_thanatos_network:
+    path:     /network/list/{page}
+    defaults: { _controller: hepiaThanatosBundle:Network:index, page: 1}
+    
+hepia_thanatos_network_new:
+    path:     /network/new
+    defaults: { _controller: hepiaThanatosBundle:Network:new }
+
+hepia_thanatos_network_view:
+    path:      /network/{id}
+    defaults:
+        _controller: hepiaThanatosBundle:Network:view
+
+hepia_thanatos_project:
+    path:     /project/list/{page}
+    defaults: { _controller: hepiaThanatosBundle:Project:index, page: 1}
+    
+hepia_thanatos_project_new:
+    path:     /project/new
+    defaults: { _controller: hepiaThanatosBundle:Project:new }
+    
+hepia_thanatos_project_view:
+    path:     /project/{id}/{page}
+    defaults: { _controller: hepiaThanatosBundle:Project:view, page: 1}
+
+hepia_thanatos_instance_view:
+    path:     /instance/{id}
+    defaults: { _controller: hepiaThanatosBundle:Instance:view }  
+   
+hepia_thanatos_instance_new:
+    path:     /project/{id}/instance/new
+    defaults: { _controller: hepiaThanatosBundle:Instance:new }
+    
+hepia_thanatos_set:
+    path:     /set/list/{page}
+    defaults: { _controller: hepiaThanatosBundle:Set:index, page: 1}
+    
+hepia_thanatos_set_new:
+    path:     /set/new
+    defaults: { _controller: hepiaThanatosBundle:Set:new }
+    
+hepia_thanatos_set_view:
+    path:      /set/{id}
+    defaults:
+        _controller: hepiaThanatosBundle:Set:view

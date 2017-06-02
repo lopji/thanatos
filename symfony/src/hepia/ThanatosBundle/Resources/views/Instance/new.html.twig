@@ -1,0 +1,50 @@
+{% extends "hepiaThanatosBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Créer une instance{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Créer une instance</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-lg-4">
+                            <div class="row"> 
+                                {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                                {{ form_errors(form) }}
+                                <div class="form-group">
+                                    {{ form_label(form.title, "Titre") }}
+                                    {{ form_errors(form.title) }}
+                                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.network, "Réseau de neurones") }}
+                                    {{ form_errors(form.network) }}
+                                    {{ form_widget(form.network, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.data, "Ensemble de données") }}
+                                    {{ form_errors(form.data) }}
+                                    {{ form_widget(form.data, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.computers, "Choisir les ordinateurs") }}
+                                    {{ form_errors(form.computers) }}
+                                    {{ form_widget(form.computers, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                {{ form_widget(form.save, { 'label': 'Créer' , 'attr': {'class': 'btn btn-primary'}}) }}
+                                {{ form_rest(form) }}
+                                {{ form_end(form) }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

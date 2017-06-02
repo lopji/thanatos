@@ -1,0 +1,19 @@
+parameters: 
+    max_project_per_page: 10
+    ip_server: http://129.194.184.108:8080
+    save_directory: '%kernel.root_dir%/../web/upload/save'
+
+services:
+    hepia.js_vars:
+        class: stdClass
+    hepia_thanatos.computer:
+        class:     hepia\ThanatosBundle\Computer\Computer
+        arguments: [%ip_server%]
+    hepia.listener.js_vars_initialize:
+        class: hepia\ThanatosBundle\Listener\JsVarsInitializeListener
+        arguments: ["@hepia.js_vars", %kernel.debug%]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+#   hepia_thanatos.example:
+#           class: hepia\ThanatosBundle\Example
+#           arguments: ["@service_id", "plain_value", "%parameter%"]

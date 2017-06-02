@@ -1,0 +1,72 @@
+{% extends "hepiaThanatosBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Tableau de bord{% endblock %}
+
+{% block body %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tableau de bord</h1>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+        <div class="row" id="computers">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Comparateur
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            {{ form_errors(form.instances) }}
+                            {{ form_widget(form.instances, {'attr': {'class': 'form-control', 'style' : 'height: 300px;'}}) }}
+                        </div>
+                        {{ form_widget(form.send, { 'label': 'Comparer' , 'attr': {'class': 'btn btn-primary'}}) }}
+                        {{ form_rest(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        var JsVars = jQuery('#js-vars').data('vars');
+        var socket = io.connect('http://' + JsVars.websocket.host + ':' + JsVars.websocket.port + '/javascript');
+        socket.on('computers', function (computers) {
+            var i;
+            $('#computers').empty();
+            for (i = 0; i < computers.length; i++) {
+                var color;
+                switch (computers[i].connected) {
+                    case 0:
+                        color = "red";
+                        break;
+                    case 1:
+                        color = "green";
+                        break;
+                }
+                $('#computers').append('<div class="col-lg-3 col-md-6">\n\
+                                                    <div class="panel panel-' + color + '">\n\
+                                                        <div class="panel-heading">\n\
+                                                            <div class="row">\n\
+                                                                <div class="col-xs-3">\n\
+                                                                    <i class="fa fa-laptop fa-5x"></i>\n\
+                                                                </div>\n\
+                                                                <div class="col-xs-9 text-right">\n\
+                                                                    <div class="medium">' + computers[i].name + '</div>\n\
+                                                                </div>\n\
+                                                            </div>\n\
+                                                        </div>\n\
+                                                    </div>\n\
+                                                </div>');
+            }
+        });
+    </script>
+{% endblock %}

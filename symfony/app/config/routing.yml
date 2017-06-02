@@ -1,0 +1,7 @@
+hepia_thanatos:
+    resource: "@hepiaThanatosBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

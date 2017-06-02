@@ -1,0 +1,16 @@
+https://github.com/invisibleroads/socketIO-clienthttps://github.com/invisibleroads/socketIO-client
+THEANO_FLAGS='device=gpu' python client.py
+
+apt-cache search nvidia | grep -P '^nvidia-[0-9]+\s'
+
+nvidia-smi
+
+ls -la /dev | grep nvidia
+sudo apt-get install nvidia-xxx
+
+375.39-0ubuntu0.16.04.1
+
+apt-cache madison nvidia-375
+
+apt-get install nvidia-375=375.39-0ubuntu0.16.04.1
+
