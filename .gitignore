@@ -1,5 +1,3 @@
 /serveur/node_modules
-/serveur/uploads/datasets/*
 /serveur/uploads/saves/*
-/serveur/uploads/networks/*
 /outils/dataset/*
