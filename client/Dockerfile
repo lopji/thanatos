@@ -1,5 +1,5 @@
 # Start with CUDA 
-FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu16.04
+FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
 # Set CUDA_ROOT
 ENV CUDA_ROOT /usr/local/cuda/bin
