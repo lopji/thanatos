@@ -39,7 +39,9 @@ RUN mkdir download
 RUN wget https://launchpad.net/ubuntu/+archive/primary/+files/nvidia-graphics-drivers-375_375.39.orig.tar.gz
 RUN mv nvidia-graphics-drivers-375_375.39.orig.tar.gz download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
 RUN gunzip download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
-RUN tar -xvf download/nvidia-graphics-drivers-375_375.39.orig.tar
+RUN tar -xvf download/nvidia-graphics-drivers-375_375.39.orig.tar -C download
+RUN chmod 777 download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run
+RUN ./download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run
 
 # Add the client script
 COPY client.py /tmp/client.py
