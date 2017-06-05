@@ -42,22 +42,17 @@ function add(computer) {
 
 function launch(id, name, socket) {
     var parent = this;
-    console.log("test1");
     db.constructor.query("SELECT instance.id, dataset, network, number, instance.title, project_id FROM instance join data on data_id = data.id join network on network_id = network.id where instance.id = ?", id)
             .on('result', function (instance) {
-                console.log("test2");
                 var id = parent.findByName(name);
                 if (id !== -1) {
-                    console.log("test3");
                     parent.computers[id].id = instance.id;
                     parent.computers[id].title = instance.title;
                     parent.computers[id].project_id = instance.project_id;
-                    console.log(__dirname + '/uploads/saves/' + id + '.npz');
                     socket.emit("launch", {name: name, id: instance.id, network: instance.network, dataset: instance.dataset, number: instance.number, last: fs.existsSync(__dirname + '/uploads/saves/' + instance.id + '.npz')});
                 }
             })
             .on('error', function (error) {
-                 console.log("test4");
                 console.log(error);
             });
 }

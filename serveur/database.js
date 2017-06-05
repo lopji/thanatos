@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var pool = mysql.createPool({
     connectionLimit: 100,
-    host: 'localhost',
+    host: '129.194.184.108',
     user: 'root',
-    password: '',
+    password: 'tosca1995',
     database: 'symfony',
     multipleStatements: true
 });
