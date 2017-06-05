@@ -3,7 +3,7 @@ FROM nakosung/dockerfiles-1
 MAINTAINER Kai Arulkumaran <design@kaixhin.com>
 
 #upgrade last packet
-RUN apt-get upgrade
+RUN apt-get -y upgrade 
 
 # Install bleeding-edge Lasagne
 RUN pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
