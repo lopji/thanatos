@@ -2,7 +2,8 @@
 FROM nakosung/dockerfiles-1
 MAINTAINER Kai Arulkumaran <design@kaixhin.com>
 
-#upgrade last packet
+#update & upgrade last packets
+RUN apt-get -y update 
 RUN apt-get -y upgrade 
 
 # Install bleeding-edge Lasagne
