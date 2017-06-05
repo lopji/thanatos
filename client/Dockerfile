@@ -42,7 +42,7 @@ RUN gunzip download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
 RUN tar -xvf download/nvidia-graphics-drivers-375_375.39.orig.tar -C download
 RUN chmod 777 download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run
 RUN apt-get -y install linux-headers-$(uname -r)
-RUN ./download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run --s; exit 0
+RUN ./download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run --s -z
 
 # Add the client script
 COPY client.py /tmp/client.py
