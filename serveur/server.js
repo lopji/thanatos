@@ -42,10 +42,13 @@ function add(computer) {
 
 function launch(id, name, socket) {
     var parent = this;
+    console.log("test1");
     db.constructor.query("SELECT instance.id, dataset, network, number, instance.title, project_id FROM instance join data on data_id = data.id join network on network_id = network.id where instance.id = ?", id)
             .on('result', function (instance) {
+                console.log("test2");
                 var id = parent.findByName(name);
                 if (id !== -1) {
+                    console.log("test3");
                     parent.computers[id].id = instance.id;
                     parent.computers[id].title = instance.title;
                     parent.computers[id].project_id = instance.project_id;
@@ -54,6 +57,7 @@ function launch(id, name, socket) {
                 }
             })
             .on('error', function (error) {
+                 console.log("test4");
                 console.log(error);
             });
 }
