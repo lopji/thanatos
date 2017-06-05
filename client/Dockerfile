@@ -2,9 +2,13 @@
 FROM nakosung/dockerfiles-1
 MAINTAINER Kai Arulkumaran <design@kaixhin.com>
 
+#upgrade last packet
+RUN apt-get upgrade
+
 # Install bleeding-edge Lasagne
 RUN pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
 
+# Install sockets
 RUN pip install SocketIO_client
 
 RUN echo "[global]\ndevice=gpu\nfloatX=float32\noptimizer_including=cudnn\n[lib]\ncnmem=0.1\n[nvcc]\nfastmath=True\nopenmp=True" > /root/.theanorc
