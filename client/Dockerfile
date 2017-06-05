@@ -33,6 +33,13 @@ RUN apt-get -y install cron
 RUN echo "* * * * * root pgrep -f "client" | while read PID; do echo -17 > /proc/\$PID/oom_adj; done" > /etc/cron.d/oom_disable
 RUN chmod 0644 /etc/cron.d/oom_disable
 
+# Custom driver
+RUN mkdir download
+RUN wget https://launchpad.net/ubuntu/+archive/primary/+files/nvidia-graphics-drivers-375_375.39.orig.tar.gz
+RUN mv nvidia-graphics-drivers-375_375.39.orig.tar.gz download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
+RUN gunzip download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
+RUN tar -xvf download/nvidia-graphics-drivers-375_375.39.orig.tar
+
 # Add the client script
 COPY client.py /tmp/client.py
 CMD cron && python /tmp/client.py
