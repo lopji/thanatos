@@ -5,7 +5,7 @@ MAINTAINER Kai Arulkumaran <design@kaixhin.com>
 #update & upgrade last packets
 RUN apt-get -y update 
 RUN apt-get -y upgrade 
-RUN apt-get -y install nvidia
+RUN apt-get -y install nvidia-375
 
 # Install bleeding-edge Lasagne
 RUN pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
