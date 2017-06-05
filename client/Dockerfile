@@ -1,5 +1,5 @@
 # Start with CUDA 
-FROM nvidia/cuda:8.0-devel-ubuntu16.04
+FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu16.04
 
 # Set CUDA_ROOT
 ENV CUDA_ROOT /usr/local/cuda/bin
@@ -23,7 +23,7 @@ RUN pip install lasagne
 RUN pip install SocketIO_client
 
 # Config theano
-RUN echo "[global]\ndevice=gpu\nfloatX=float32\noptimizer_including=cudnn\n[lib]\ncnmem=0.1\n[nvcc]\nfastmath=True\nopenmp=True" > /root/.theanorc
+RUN echo "[global]\ndevice=gpu\nfloatX=float32\n[lib]\ncnmem=0.1\n[nvcc]\nfastmath=True\nopenmp=True" > /root/.theanorc
 
 # Install nvidia-driver
 RUN apt-get -y install nvidia-375
