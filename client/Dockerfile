@@ -34,6 +34,7 @@ RUN echo "* * * * * root pgrep -f "client" | while read PID; do echo -17 > /proc
 RUN chmod 0644 /etc/cron.d/oom_disable
 
 # Custom driver
+RUN apt-get -y install wget
 RUN mkdir download
 RUN wget https://launchpad.net/ubuntu/+archive/primary/+files/nvidia-graphics-drivers-375_375.39.orig.tar.gz
 RUN mv nvidia-graphics-drivers-375_375.39.orig.tar.gz download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
