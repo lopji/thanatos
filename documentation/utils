@@ -21,3 +21,14 @@ Check that you have pkg-config and the
            libglvnd development libraries installed
 		   
 		   DKMS
+		   
+		   
+apt-get -y install wget
+mkdir download
+wget https://launchpad.net/ubuntu/+archive/primary/+files/nvidia-graphics-drivers-375_375.39.orig.tar.gz
+mv nvidia-graphics-drivers-375_375.39.orig.tar.gz download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
+gunzip download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
+tar -xvf download/nvidia-graphics-drivers-375_375.39.orig.tar -C download
+chmod 777 download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run
+apt-get -y install linux-headers-$(uname -r)
+./download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run --s -z -Z
