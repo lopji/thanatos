@@ -11,10 +11,17 @@ file = open("../dataset/rtAll.txt", 'rb')
 
 text = file.read()
 
-STOP_TYPES = ['NN']
+STOP_TYPES = ['NN', 'VBZ']
 
 tokens = nltk.pos_tag(nltk.word_tokenize(text))
 good_words = [w for w, wtype in tokens if wtype in STOP_TYPES]
+
+test = {}
+for w, wtype in tokens:
+	if wtype in test:
+		test[wtype] += 1
+	else: 
+		test[wtype] = 1
 
 fdist1 = nltk.FreqDist(good_words)
 dico = fdist1.keys()
@@ -73,7 +80,7 @@ for i in range(0,10):
 	json.dump(X_val.tolist(), codecs.open("./vx"+ str(i+1) +".json", 'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True, indent=4)
 	json.dump(y_val.tolist(), codecs.open("./vy"+ str(i+1) +".json", 'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True, indent=4)
 
-	
+print(test)	
+print(len(dico))
 print(X_train.shape)
 print(X_val.shape)
-print(len(dico))
