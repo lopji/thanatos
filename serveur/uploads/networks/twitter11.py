@@ -1,6 +1,9 @@
 def build_cnn(x, y, input_var=None):
 	import lasagne
 	
+	print(x)
+	print(y)
+	
 	network = lasagne.layers.InputLayer(shape=(None, x[0], x[1], x[2]),
                                         input_var=input_var)
 
