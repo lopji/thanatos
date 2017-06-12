@@ -32,3 +32,9 @@ tar -xvf download/nvidia-graphics-drivers-375_375.39.orig.tar -C download
 chmod 777 download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run
 apt-get -y install linux-headers-$(uname -r)
 ./download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run --s -z -Z
+
+http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/
+
+https://fr.wikipedia.org/wiki/Word_embedding
+
+http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
