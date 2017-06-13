@@ -156,47 +156,53 @@ def build_custom_mlp(input_var=None, depth=2, width=800, drop_input=.2,
 
 
 def build_cnn(input_var=None):
-    # As a third model, we'll create a CNN of two convolution + pooling stages
-    # and a fully-connected hidden layer in front of the output layer.
+	network = lasagne.layers.InputLayer(shape=(None, 1, 28, 28),
+										input_var=input_var)
+										
+	convolution1 = lasagne.layers.Conv2DLayer(
+			network, num_filters=30, filter_size=(2, 28),
+			nonlinearity=lasagne.nonlinearities.rectify,
+			W=lasagne.init.GlorotUniform())
+										
+	convolution2 = lasagne.layers.Conv2DLayer(
+			network, num_filters=20, filter_size=(3, 28),
+			nonlinearity=lasagne.nonlinearities.rectify,
+			W=lasagne.init.GlorotUniform())
+				
+	convolution3 = lasagne.layers.Conv2DLayer(
+			network, num_filters=15, filter_size=(4, 28),
+			nonlinearity=lasagne.nonlinearities.rectify,
+			W=lasagne.init.GlorotUniform())
+			
+						
+	print(convolution1.output_shape)
+	print(convolution2.output_shape)
+	print(convolution3.output_shape)
+			
+	map1 = lasagne.layers.reshape(convolution1, ([0], [1], [2]))
+	map2 = lasagne.layers.reshape(convolution2, ([0], [1], [2]))
+	map3 = lasagne.layers.reshape(convolution3, ([0], [1], [2]))
+				
+	print(map1.output_shape)
+	print(map2.output_shape)
+	print(map3.output_shape)
 
-    # Input layer, as usual:
-    network = lasagne.layers.InputLayer(shape=(None, 1, 28, 28),
-                                        input_var=input_var)
-    # This time we do not apply input dropout, as it tends to work less well
-    # for convolutional layers.
+	maxpool1 = lasagne.layers.MaxPool1DLayer(map1, pool_size=(map1.output_shape[2]))
+	maxpool2 = lasagne.layers.MaxPool1DLayer(map2, pool_size=(map2.output_shape[2]))
+	maxpool3 = lasagne.layers.MaxPool1DLayer(map3, pool_size=(map3.output_shape[2]))
+	
+	print(maxpool1.output_shape)
+	print(maxpool2.output_shape)
+	print(maxpool3.output_shape)
 
-    # Convolutional layer with 32 kernels of size 5x5. Strided and padded
-    # convolutions are supported as well; see the docstring.
-    network = lasagne.layers.Conv2DLayer(
-            network, num_filters=32, filter_size=(5, 5),
-            nonlinearity=lasagne.nonlinearities.rectify,
-            W=lasagne.init.GlorotUniform())
-    # Expert note: Lasagne provides alternative convolutional layers that
-    # override Theano's choice of which implementation to use; for details
-    # please see http://lasagne.readthedocs.org/en/latest/user/tutorial.html.
-
-    # Max-pooling layer of factor 2 in both dimensions:
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
-
-    # Another convolution with 32 5x5 kernels, and another 2x2 pooling:
-    network = lasagne.layers.Conv2DLayer(
-            network, num_filters=32, filter_size=(5, 5),
-            nonlinearity=lasagne.nonlinearities.rectify)
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
-
-    # A fully-connected layer of 256 units with 50% dropout on its inputs:
-    network = lasagne.layers.DenseLayer(
-            lasagne.layers.dropout(network, p=.5),
-            num_units=256,
-            nonlinearity=lasagne.nonlinearities.rectify)
-
-    # And, finally, the 10-unit output layer with 50% dropout on its inputs:
-    network = lasagne.layers.DenseLayer(
-            lasagne.layers.dropout(network, p=.5),
-            num_units=10,
-            nonlinearity=lasagne.nonlinearities.softmax)
-
-    return network
+	network = lasagne.layers.ConcatLayer((maxpool1, maxpool2, maxpool3))
+			
+	network = lasagne.layers.DenseLayer(
+			lasagne.layers.dropout(network, p=.5),
+			num_units=10,
+			nonlinearity=lasagne.nonlinearities.softmax)
+			
+	return network
 
 
 # ############################# Batch iterator ###############################
@@ -240,17 +246,8 @@ def main(model='mlp', num_epochs=500):
 
     # Create neural network model (depending on first command line parameter)
     print("Building model and compiling functions...")
-    if model == 'mlp':
-        network = build_mlp(input_var)
-    elif model.startswith('custom_mlp:'):
-        depth, width, drop_in, drop_hid = model.split(':', 1)[1].split(',')
-        network = build_custom_mlp(input_var, int(depth), int(width),
-                                   float(drop_in), float(drop_hid))
-    elif model == 'cnn':
-        network = build_cnn(input_var)
-    else:
-        print("Unrecognized model type %r." % model)
-        return
+
+    network = build_cnn(input_var)
 
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
