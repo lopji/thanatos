@@ -1,8 +1,6 @@
 def build_cnn(x, y, input_var=None):
 	import lasagne
 	
-	print("test1")
-	
 	network = lasagne.layers.InputLayer(shape=(None, x[0], x[1], x[2]),
 										input_var=input_var)
 										
@@ -19,15 +17,15 @@ def build_cnn(x, y, input_var=None):
 	network = lasagne.layers.Conv2DLayer(
 			network, num_filters=32, filter_size=(3, 3),
 			nonlinearity=lasagne.nonlinearities.rectify)
-
+	
 	network = lasagne.layers.Conv2DLayer(
 			network, num_filters=64, filter_size=(2, 2),
 			nonlinearity=lasagne.nonlinearities.rectify)
-
+	
 	network = lasagne.layers.Conv2DLayer(
 			network, num_filters=128, filter_size=(1, 1),
 			nonlinearity=lasagne.nonlinearities.rectify)	
-
+	
 	network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
 			
 	network = lasagne.layers.DenseLayer(
