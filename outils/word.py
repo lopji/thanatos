@@ -16,7 +16,7 @@ text = file.read()
 sentences = text.split("\n")
 
 rtAll = word2vec.Text8Corpus('rtAll.txt')
-model = word2vec.Word2Vec(rtAll, size=100)
+model = word2vec.Word2Vec(rtAll, size=100, iter=200)
 vocabulary = model.wv.vocab.keys()
 count_words = []
 dataset = []

@@ -27,6 +27,12 @@ apt-get -y install wget
 mkdir download
 wget https://launchpad.net/ubuntu/+archive/primary/+files/nvidia-graphics-drivers-375_375.39.orig.tar.gz
 mv nvidia-graphics-drivers-375_375.39.orig.tar.gz download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
+
+
+Iteration value:
+5
+50
+200
 gunzip download/nvidia-graphics-drivers-375_375.39.orig.tar.gz
 tar -xvf download/nvidia-graphics-drivers-375_375.39.orig.tar -C download
 chmod 777 download/nvidia-graphics-drivers-375-375.39/NVIDIA-Linux-x86_64-375.39-no-compat32.run
