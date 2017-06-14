@@ -16,7 +16,7 @@ text = file.read()
 sentences = text.split("\n")
 
 rtAll = word2vec.Text8Corpus('rtAll.txt')
-model = word2vec.Word2Vec(rtAll, size=100, iter=200)
+model = word2vec.Word2Vec(rtAll, size=10, iter=200)
 vocabulary = model.wv.vocab.keys()
 count_words = []
 dataset = []
@@ -46,9 +46,9 @@ for data in dataset:
 			if words[i] in vocabulary:
 				values.append(model.wv[words[i]])
 			else:
-				values.append([0] * 100)
+				values.append([0] * 10)
 		else:
-			values.append([0] * 100)
+			values.append([0] * 10)
 	train.append([values])
 gc.enable()
 
