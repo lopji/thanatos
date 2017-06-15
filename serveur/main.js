@@ -88,11 +88,17 @@ app.get('/saves/get/:id', function (req, res) {
 
 app.post('/saves/post/:id', upload.any(), function (req, res) {
     console.log("REST upload file");
-    var id = req.params.id;
-    var source = fs.createReadStream(__dirname + '/tmp/' + req.files[0].filename);
-    var dest = fs.createWriteStream(__dirname + '/uploads/saves/' + id + '.npz');
-    source.pipe(dest);
-    fs.unlinkSync(__dirname + '/tmp/' + req.files[0].filename);
+    try
+    {
+        var id = req.params.id;
+        var source = fs.createReadStream(__dirname + '/tmp/' + req.files[0].filename);
+        var dest = fs.createWriteStream(__dirname + '/uploads/saves/' + id + '.npz');
+        source.pipe(dest);
+        fs.unlinkSync(__dirname + '/tmp/' + req.files[0].filename);
+    } catch (e)
+    {
+        console.log(e);
+    }
     res.send(200);
 });
 
