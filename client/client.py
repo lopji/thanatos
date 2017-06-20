@@ -169,7 +169,7 @@ class Instance(Thread):
 	def main(self):
 		try:
 			self.ComputerNamespace.setStatus(1)
-			time.sleep(int(self.number) * 60)
+			
 			X_train, y_train, X_val, y_val = self.load_dataset()
 		except:
 			print "Unexpected error:", sys.exc_info()[0]
