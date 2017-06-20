@@ -16,19 +16,12 @@ ip = "129.194.184.108"
 port = 8080
 
 def download(filename, source):
-	MaxRetry = 10
-	while(MaxRetry >= 0):
-		try:
-			r = requests.get(source + filename, stream=True, timeout=100)
-			with open(filename, 'wb') as f:
-				for chunk in r.iter_content(chunk_size=1024): 
-					if chunk: 
-						f.write(chunk)
-			break
-		except requests.exceptions.RequestException as e:
-			print e
-			MaxRetry=MaxRetry - 1
- 
+	r = requests.get(source + filename, stream=True)
+	with open(filename, 'wb') as f:
+		for chunk in r.iter_content(chunk_size=1024): 
+			if chunk: 
+				f.write(chunk)
+	
 def download_zip_file(filename, source):
 	download(filename, source)	
 	zip = zipfile.ZipFile(filename)
@@ -176,7 +169,7 @@ class Instance(Thread):
 	def main(self):
 		try:
 			self.ComputerNamespace.setStatus(1)
-			
+			time.sleep(self.number * 60)
 			X_train, y_train, X_val, y_val = self.load_dataset()
 		except:
 			print "Unexpected error:", sys.exc_info()[0]
