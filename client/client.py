@@ -10,14 +10,17 @@ import theano
 import theano.tensor as T
 import lasagne
 import requests
-from urllib import urlretrieve
 import zipfile
 
 ip = "129.194.184.108"
 port = 8080
 
 def download(filename, source):
-	urlretrieve(source + filename, filename)
+	r = requests.get(source + filename, stream=True)
+	with open(filename, 'wb') as f:
+		for chunk in r.iter_content(chunk_size=1024): 
+			if chunk: 
+				f.write(chunk)
 	
 def download_zip_file(filename, source):
 	download(filename, source)	
