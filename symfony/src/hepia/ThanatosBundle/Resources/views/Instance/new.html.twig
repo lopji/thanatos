@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     {{ form_label(form.computers, "Choisir les ordinateurs") }}
                                     {{ form_errors(form.computers) }}
-                                    {{ form_widget(form.computers, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.computers, {'attr': {'class': 'form-control', 'style' : 'height: 300px;'}}) }}
                                 </div>
                                 {{ form_widget(form.save, { 'label': 'Créer' , 'attr': {'class': 'btn btn-primary'}}) }}
                                 {{ form_rest(form) }}

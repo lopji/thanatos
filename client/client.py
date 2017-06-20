@@ -16,12 +16,19 @@ ip = "129.194.184.108"
 port = 8080
 
 def download(filename, source):
-	r = requests.get(source + filename, stream=True)
-	with open(filename, 'wb') as f:
-		for chunk in r.iter_content(chunk_size=1024): 
-			if chunk: 
-				f.write(chunk)
-	
+	MaxRetry = 10
+	while(MaxRetry >= 0):
+		try:
+			r = requests.get(source + filename, stream=True, timeout=100)
+			with open(filename, 'wb') as f:
+				for chunk in r.iter_content(chunk_size=1024): 
+					if chunk: 
+						f.write(chunk)
+			break
+		except requests.exceptions.RequestException as e:
+			print e
+			MaxRetry=MaxRetry - 1
+ 
 def download_zip_file(filename, source):
 	download(filename, source)	
 	zip = zipfile.ZipFile(filename)
